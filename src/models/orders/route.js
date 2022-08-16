@@ -9,7 +9,7 @@ router
   .get("/orders", controller.GET)
   // .get("/orders/:id", AUTH_USER, controller.GET_ONE)
   // .post("/category", AUTH_USER, controller.POST)
-  .put("/orders/:id", AUTH_USER, controller.UPDATE)
+  .put("/orders/:id", controller.UPDATE)
   .delete("/orders/:id", AUTH_USER, controller.DELETE);
 
 module.exports = router;

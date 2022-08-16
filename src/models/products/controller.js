@@ -76,7 +76,7 @@ module.exports = {
         equipment,
         equipment_uz
       );
-
+h
       if (!createProduct)
         return res.status(500).json({ message: "SERVER_CREATED_ERROR!" });
 

@@ -1,4 +1,5 @@
 const model = require("./model");
+const productModel = require('../products/model')
 
 module.exports = {
   GET: async (req, res) => {
@@ -17,6 +18,34 @@ module.exports = {
   UPDATE: async (req, res) => {
     try {
       const { params, body } = req;
+
+      const findOrder = await model.findOrder(params.id)
+      let quantity
+
+      const productOne = await productModel.getOneProduct(findOrder.product_id)
+      if (!productOne) {
+        return res.status(404).json({ message: "NOT FOUND!" });
+      }else if(body.status == false){
+          quantity = JSON.parse(productOne.quantity) + 1
+      }else if(body.status == true){
+          quantity = productOne.quantity - 1
+      }
+
+      await productModel.updateProduct(
+        null,
+        null,
+        null,
+        null,
+        quantity || null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        productOne.id
+      );
 
       const updateOrder = await model.updateOrders(
         body.status,
